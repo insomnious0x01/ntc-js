@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript colour code converter</title>
+</head>
+<body>
+
+<script type="text/javascript" src="ntc.js"></script>
+
+<!-- Below is a static example -->
+<script type="text/javascript">
+
+  var n_match  = ntc.name("#ff00f0"); // this value can be replaced by a variable in 'while' or 'for-each' loops
+  n_rgb        = n_match[0]; // RGB value of closest match
+  n_name       = n_match[1]; // Text string: Color name
+  n_exactmatch = n_match[2]; // True if exact color match
+
+  document.write(n_match);
+
+</script>
+
+
+<!-- Below is an example of feeding colour codes with use of a variable -->
+<!-- XSLT -->
+
+<xsl:for-each select="example-Node">
+	<xsl:variable name="node-with-colour-code" select="@colour-code" />
+	<script type="text/javascript">
+		var n_match  = ntc.name("<xsl:value-of select="$node-with-colour-code" />"); // this value can be replaced by a variable in 'while' or 'for-each' loops
+  		n_rgb        = n_match[0]; // RGB value of closest match
+  		n_name       = n_match[1]; // Text string: Color name
+  		n_exactmatch = n_match[2]; // True if exact color match
+		document.write(n_match); // Colour name will be returned
+	</script>
+</xsl:for-each>
+
+</body>
+</html>
